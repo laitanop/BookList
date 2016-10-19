@@ -69,7 +69,7 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _reducers = __webpack_require__(186);
+	var _reducers = __webpack_require__(187);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -21444,6 +21444,10 @@
 
 	var _reactRedux = __webpack_require__(160);
 
+	var _index = __webpack_require__(186);
+
+	var _redux = __webpack_require__(167);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21464,10 +21468,17 @@
 		_createClass(BookList, [{
 			key: 'renderList',
 			value: function renderList() {
+				var _this2 = this;
+
 				return this.props.books.map(function (book) {
 					return _react2.default.createElement(
 						'li',
-						{ key: book.title, className: 'list-group-item' },
+						{
+							key: book.title,
+							onClick: function onClick() {
+								return _this2.props.selectBook(book);
+							},
+							className: 'list-group-item' },
 						book.title
 					);
 				});
@@ -21494,11 +21505,35 @@
 
 		};
 	}
+	// Anything returned from this function will end up as prpos
+	// on the BookList container
+	function mapDispatchToProps(dispatch) {
+		// whenever selectBooks is called, the result should be passed 
+		// to all of our reducers
+		return (0, _redux.bindActionCreators)({ selectBook: _index.selectBook }, dispatch);
+	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(BookList);
+	// Promote BookList from a component to a container - it needs to know 
+	// about this new dispatch method, selectBook. Make it available 
+	// as prop. 
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BookList);
 
 /***/ },
 /* 186 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.selectBook = selectBook;
+	function selectBook(book) {
+		console.log('A book has been selected:', book.title);
+	}
+
+/***/ },
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21509,7 +21544,7 @@
 
 	var _redux = __webpack_require__(167);
 
-	var _reducer_books = __webpack_require__(187);
+	var _reducer_books = __webpack_require__(188);
 
 	var _reducer_books2 = _interopRequireDefault(_reducer_books);
 
@@ -21522,7 +21557,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports) {
 
 	'use strict';
