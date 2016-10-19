@@ -3,10 +3,10 @@
 
 export default function() {
 	return [
-		{ title: 'Evicted'},
-		{ title: 'My name is Lucy Barton' },
-		{ title: 'Homegoing'},
-		{ title: 'When Breath Becomes Air' } 
+		{ title: 'Evicted', pages: 101 },
+		{ title: 'My name is Lucy Barton', pages: 39 },
+		{ title: 'Homegoing', pages: 50 },
+		{ title: 'When Breath Becomes Air', pages: 60 } 
 
 
 
